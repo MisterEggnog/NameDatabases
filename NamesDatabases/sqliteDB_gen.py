@@ -15,9 +15,16 @@ except:
     pass
 
 con = sqlite3.connect(database)
+cur = con.cursor()
 
 # Create tables
-con.execute(namesTables)
+cur.execute(namesTables)
+
+# Load first names from 'first names'/all.txt
+firstNames = open("first names/all.txt", "r", encoding='utf-8-sig')
+lines = firstNames.readlines()
+cur.executemany(addFirstName, map(lambda l : (l.strip(),), lines))
+firstNames.close()
 
 con.commit()
 
