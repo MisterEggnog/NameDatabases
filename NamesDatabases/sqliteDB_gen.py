@@ -2,6 +2,8 @@
 
 namesTable = '''CREATE TABLE names
                 (name text, lang text)'''
+addFirstName = '''INSERT INTO names (name)
+                  VALUES (?)'''
 
 import sqlite3
 
