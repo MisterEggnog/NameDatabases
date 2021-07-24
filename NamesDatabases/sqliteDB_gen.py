@@ -3,9 +3,9 @@ import sqlite3
 import os
 
 database = 'names.db'
-namesTable = '''CREATE TABLE names
-                (name text, lang text)'''
-addFirstName = '''INSERT INTO names (name)
+namesTable = '''CREATE TABLE first_names
+                (name text)'''
+addFirstName = '''INSERT INTO first_names (name)
                   VALUES (?)'''
 
 try:
