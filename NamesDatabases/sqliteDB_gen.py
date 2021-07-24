@@ -3,11 +3,12 @@ import sqlite3
 import os
 
 database = 'names.db'
-namesTable = '''CREATE TABLE first_names
+namesTables = '''CREATE TABLE first_names
                 (name text)'''
 addFirstName = '''INSERT INTO first_names (name)
                   VALUES (?)'''
 
+# Try to remove old database
 try:
     os.remove(database)
 except:
@@ -15,7 +16,8 @@ except:
 
 con = sqlite3.connect(database)
 
-con.execute(namesTable)
+# Create tables
+con.execute(namesTables)
 
 con.commit()
 
