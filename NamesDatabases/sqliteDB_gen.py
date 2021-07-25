@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-import sqlite3
 import os
+from Pathlib import PurePath
+import glob
+import sqlite3
 
 database = 'names.db'
 firstNamesTable = '''CREATE TABLE first_names
@@ -28,6 +30,11 @@ firstNames = open("first names/all.txt", "r", encoding='utf-8-sig')
 lines = firstNames.readlines()
 cur.executemany(addFirstName, map(lambda l : (l.strip(),), lines))
 firstNames.close()
+
+# Load last names from 'surnames/??.txt'
+files = glob.glob('surnames/??.txt')
+for file in files:
+    lang = PurePath(file).stem
 
 con.commit()
 
