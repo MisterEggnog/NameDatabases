@@ -1,0 +1,3 @@
+This script generates a sqlite version of the database.
+It is also licensed under the unlicense.
+The database produced is under the same license of this repo.
