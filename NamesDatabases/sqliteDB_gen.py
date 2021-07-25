@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-from Pathlib import PurePath
+from pathlib import PurePath
 import glob
 import sqlite3
 
@@ -11,6 +11,8 @@ lastNamesTable = '''CREATE TABLE last_names
                     (name text, lang text)'''
 addFirstName = '''INSERT INTO first_names (name)
                   VALUES (?)'''
+addSurName = '''INSERT INTO last_names (name, lang)
+                VALUES (?, ?)'''
 
 # Try to remove old database
 try:
@@ -35,6 +37,10 @@ firstNames.close()
 files = glob.glob('surnames/??.txt')
 for file in files:
     lang = PurePath(file).stem
+    nameFile = open(file, "r", encoding='utf-8-sig')
+    lines = nameFile.readlines()
+    cur.executemany(addSurName, map(lambda l : (l.strip(), lang), lines))
+    nameFile.close()
 
 con.commit()
 
