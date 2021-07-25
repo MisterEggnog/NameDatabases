@@ -3,8 +3,10 @@ import sqlite3
 import os
 
 database = 'names.db'
-namesTables = '''CREATE TABLE first_names
-                (name text)'''
+firstNamesTable = '''CREATE TABLE first_names
+                 (name text);'''
+lastNamesTable = '''CREATE TABLE last_names
+                    (name text, lang text)'''
 addFirstName = '''INSERT INTO first_names (name)
                   VALUES (?)'''
 
@@ -18,7 +20,8 @@ con = sqlite3.connect(database)
 cur = con.cursor()
 
 # Create tables
-cur.execute(namesTables)
+cur.execute(firstNamesTable)
+cur.execute(lastNamesTable)
 
 # Load first names from 'first names'/all.txt
 firstNames = open("first names/all.txt", "r", encoding='utf-8-sig')
